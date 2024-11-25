@@ -1,6 +1,8 @@
 import React from "react";
+import { useRouter } from "next/router";
 
 const Sidebar = () => {
+  const rounter = useRouter()
   return (
     <div className="w-64 bg-white h-screen border-r p-4">
       <div className="mb-8 cursor-pointer ">
@@ -170,7 +172,7 @@ const Sidebar = () => {
         </svg>
       </div>
       <ul className="space-y-4">
-        <li className="text-gray-800 w-full font-medium cursor-pointer flex items-center space-x-2 hover:bg-gray-200  px-4 py-2 rounded">
+        <li onClick={() => rounter.push("/admin_panel")} className="text-gray-800 w-full font-medium cursor-pointer flex items-center space-x-2 hover:bg-gray-200  px-4 py-2 rounded">
           <svg
             width="24"
             height="24"
@@ -187,7 +189,7 @@ const Sidebar = () => {
           </svg>
           <span>Course</span>
         </li>
-        <li className="text-gray-800 w-full font-medium cursor-pointer flex items-center space-x-2 hover:bg-gray-200  px-4 py-2 rounded">
+        <li onClick={() => rounter.push("/admin_panel/assignments")} className="text-gray-800 w-full font-medium cursor-pointer flex items-center space-x-2 hover:bg-gray-200  px-4 py-2 rounded">
           <svg
             width="24"
             height="24"
@@ -204,7 +206,7 @@ const Sidebar = () => {
           </svg>
           <span>Assignment</span>
         </li>
-        <li className="text-gray-800 w-full font-medium cursor-pointer flex items-center space-x-2 hover:bg-gray-200  px-4 py-2 rounded">
+        <li onClick={() => rounter.push("/admin_panel/promo_code")} className="text-gray-800 w-full font-medium cursor-pointer flex items-center space-x-2 hover:bg-gray-200  px-4 py-2 rounded">
           <svg
             width="24"
             height="24"
@@ -229,7 +231,7 @@ const Sidebar = () => {
           <span>Promo code</span>
         </li>
       </ul>
-      <div className="absolute bottom-12 left-4 text-gray-700 font-medium cursor-pointer flex items-center space-x-2 hover:bg-gray-200 px-4 py-2 w-56 rounded">
+      <div  className="absolute bottom-12 left-4 text-gray-700 font-medium cursor-pointer flex items-center space-x-2 hover:bg-gray-200 px-4 py-2 w-56 rounded">
         <svg
           width="24"
           height="24"
