@@ -1,42 +1,54 @@
 import React from "react";
 import Sidebar from "@/components/AdminSidebar";
 import { TrashIcon, EditIcon } from "@/assets/icons/admin_icon/adminIcon";
-import AdminHeaderBar from "@/components/AdminHeaderBar";
+import AdminHeaderbar from "@/components/AdminHeaderbar";
+import { useState } from "react";
+
+const assignments = [
+  {
+    id: 1,
+    detail: "What are the 4 elem...",
+    course: "Service Design Essentials",
+    lessons: "Introduction",
+    sub_lesson: "4 Levels of Service D...",
+    created_date: "12/02/2022 10:30PM",
+  },
+  {
+    id: 2,
+    detail: "What are the 4 elem...",
+    course: "Software Developer",
+    lessons: "Introduction",
+    sub_lesson: "4 Levels of Service D...",
+    created_date: "12/02/2022 10:30PM",
+  },
+  {
+    id: 3,
+    detail: "What are the 4 elem...",
+    course: "UX/UI Design Beginner",
+    lessons: "Introduction",
+    sub_lesson: "4 Levels of Service D...",
+    created_date: "12/02/2022 10:30PM",
+  },
+];
 
 const adminPanelAssignments = () => {
-  const assignments = [
-    {
-      id: 1,
-      detail: "What are the 4 elem...",
-      course: "Service Design Essentials",
-      lessons: "Introduction",
-      sub_lesson: "4 Levels of Service D...",
-      created_date: "12/02/2022 10:30PM",
-    },
-    {
-      id: 2,
-      detail: "What are the 4 elem...",
-      course: "Software Developer",
-      lessons: "Introduction",
-      sub_lesson: "4 Levels of Service D...",
-      created_date: "12/02/2022 10:30PM",
-    },
-    {
-      id: 3,
-      detail: "What are the 4 elem...",
-      course: "UX/UI Design Beginner",
-      lessons: "Introduction",
-      sub_lesson: "4 Levels of Service D...",
-      created_date: "12/02/2022 10:30PM",
-    },
-  ];
+  const [filteredAssignments, setFilteredAssignments] = useState(assignments);
+
+  const handleSearch = (results) => {
+    setFilteredAssignments(results);
+  };
+
 
   return (
     <div className="flex">
       <Sidebar />
       <div className="flex-1 bg-gray-100">
-        <AdminHeaderBar title="Assignment" buttonLabel="+ Add Course" />
-
+        <AdminHeaderbar
+          title="Assignment"
+          buttonLabel="+ Add Course"
+          data={assignments}
+          onSearch={handleSearch}
+        />
         <div className="p-6">
           <table className="w-11/12 text-left border border-gray-200 m-8 rounded-lg overflow-hidden shadow-sm">
             <thead>
@@ -50,7 +62,7 @@ const adminPanelAssignments = () => {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {assignments.map((assignment) => (
+              {filteredAssignments.map((assignment) => (
                 <tr key={assignment.id} className="hover:bg-gray-50">
                   <td className="p-2 border-t">{assignment.detail}</td>
                   <td className="p-2 border-t">{assignment.course}</td>

@@ -1,38 +1,51 @@
 import React from "react";
 import Sidebar from "../../components/AdminSidebar";
 import { TrashIcon, EditIcon } from "@/assets/icons/admin_icon/adminIcon";
-import AdminHeaderBar from "@/components/AdminHeaderBar";
+import AdminHeaderbar from "@/components/AdminHeaderbar";
+import { useState } from "react";
+
+const courses = [
+  {
+    id: 1,
+    name: "Service Design Essentials",
+    lessons: 6,
+    price: 3559.0,
+    date: "12/02/2022 10:30PM",
+  },
+  {
+    id: 2,
+    name: "Software Developer",
+    lessons: 6,
+    price: 3559.0,
+    date: "12/02/2022 10:30PM",
+  },
+  {
+    id: 3,
+    name: "UX/UI Design Beginner",
+    lessons: 6,
+    price: 3559.0,
+    date: "12/02/2022 10:30PM",
+  },
+];
+
 
 const adminPanel = () => {
-  const courses = [
-    {
-      id: 1,
-      name: "Service Design Essentials",
-      lessons: 6,
-      price: 3559.0,
-      date: "12/02/2022 10:30PM",
-    },
-    {
-      id: 2,
-      name: "Software Developer",
-      lessons: 6,
-      price: 3559.0,
-      date: "12/02/2022 10:30PM",
-    },
-    {
-      id: 3,
-      name: "UX/UI Design Beginner",
-      lessons: 6,
-      price: 3559.0,
-      date: "12/02/2022 10:30PM",
-    },
-  ];
+  const [filteredCourses, setFilteredCourses] = useState(courses);
+  
+  const handleSearch = (results) => {
+    setFilteredCourses(results);
+  };
 
   return (
     <div className="flex">
       <Sidebar />
       <div className="flex-1 bg-gray-100">
-        <AdminHeaderBar title="Course" buttonLabel="+ Add Course" />
+        <AdminHeaderbar
+          title="Course"
+          buttonLabel="+ Add Course"
+          data={courses}
+          onSearch={handleSearch}
+        />
         <div className="p-6">
           <table className="w-11/12 text-left border border-gray-200 m-8 rounded-lg overflow-hidden shadow-sm">
             <thead>
@@ -48,7 +61,7 @@ const adminPanel = () => {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {courses.map((course) => (
+              {filteredCourses.map((course) => (
                 <tr key={course.id} className="hover:bg-gray-50">
                   <td className="p-2 border-t">{course.id}</td>
                   <td className="p-2 border-t">
