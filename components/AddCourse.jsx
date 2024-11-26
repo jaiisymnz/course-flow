@@ -11,7 +11,7 @@ export const Addcourse = () => {
     image: null,
     videoTrailer: null,
     file: null,
-    created_by : 2
+    created_by: 2,
   });
   const [fileName, setFileName] = useState("");
 
@@ -100,12 +100,17 @@ export const Addcourse = () => {
     setFileName("");
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert("Course created successfully!");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("/api/courses", courseData);
+      alert("Course created successfully!");
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error creating course:", error);
+      alert("Something went wrong!");
+    }
   };
-
-  console.log(courseData);
 
   return (
     <form className="add-course-page bg-[#F6F7FC]" onSubmit={handleSubmit}>
