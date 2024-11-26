@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MagnifyingIcon } from "@/assets/icons/admin_icon/adminIcon";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const AdminHeaderbar = ({
   title,
@@ -8,7 +9,9 @@ const AdminHeaderbar = ({
   onSearch,
   apiEndpoint,
   searchParam = "name",
+  navigatePath,
 }) => {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = async (event) => {
@@ -21,6 +24,10 @@ const AdminHeaderbar = ({
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+
+  const handleNavigation = (path) => {
+    router.push(path);
   };
 
   return (
@@ -44,7 +51,7 @@ const AdminHeaderbar = ({
         </div>
         <button
           className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg"
-          onClick={handleSearch}
+          onClick={() => handleNavigation(navigatePath)}
         >
           {buttonLabel || "Search"}
         </button>

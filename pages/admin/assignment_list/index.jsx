@@ -2,11 +2,13 @@ import React from "react";
 import Sidebar from "@/components/admin/AdminSidebar";
 import { TrashIcon, EditIcon } from "@/assets/icons/admin_icon/adminIcon";
 import AdminHeaderbar from "@/components/admin/AdminHeaderbar";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import formatDate from "@/utils/formatDate";
+import { useRouter } from "next/router";
 
 const adminPanelAssignments = () => {
+  const router = useRouter;
   const [allAssignments, setAllAssignments] = useState([]);
   const [filteredAssignments, setFilteredAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,6 +34,7 @@ const adminPanelAssignments = () => {
     setFilteredAssignments(results);
   };
 
+
   return (
     <div className="flex">
       <Sidebar />
@@ -42,8 +45,9 @@ const adminPanelAssignments = () => {
           apiEndpoint="/api/assignments"
           searchParam="description"
           onSearch={handleSearch}
+          
         />
-        <div className="p-6 relative">
+        <div className="p-6">
           {loading && (
             <div className="absolute inset-0 bg-white bg-opacity-80 flex items-center justify-center z-10">
               <div className="loader border-t-4 border-blue-500 w-12 h-12 rounded-full animate-spin"></div>
@@ -62,24 +66,28 @@ const adminPanelAssignments = () => {
             </thead>
             <tbody className="bg-white">
               {filteredAssignments.length > 0 ? (
-              filteredAssignments.map((assignment,index) => (
-                <tr key={index} className="hover:bg-gray-50">
-                  <td className="p-2 border-t">{assignment.description}</td>
-                  <td className="p-2 border-t">{assignment.course_name}</td>
-                  <td className="p-2 border-t">{assignment.lesson_name}</td>
-                  <td className="p-2 border-t">{assignment.sub_lesson_name}</td>
-                  <td className="p-2 border-t">{formatDate(assignment.created_at)}</td>
-                  <td className="p-2 border-t">
-                    <button className="mr-2 hover:scale-110">
-                      <TrashIcon />
-                    </button>
-                    <button className="hover:scale-110">
-                      <EditIcon />
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
+                filteredAssignments.map((assignment, index) => (
+                  <tr key={index} className="hover:bg-gray-50">
+                    <td className="p-2 border-t">{assignment.description}</td>
+                    <td className="p-2 border-t">{assignment.course_name}</td>
+                    <td className="p-2 border-t">{assignment.lesson_name}</td>
+                    <td className="p-2 border-t">
+                      {assignment.sub_lesson_name}
+                    </td>
+                    <td className="p-2 border-t">
+                      {formatDate(assignment.created_at)}
+                    </td>
+                    <td className="p-2 border-t">
+                      <button className="mr-2 hover:scale-110">
+                        <TrashIcon />
+                      </button>
+                      <button className="hover:scale-110">
+                        <EditIcon />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
                 <tr>
                   <td
                     colSpan="8"

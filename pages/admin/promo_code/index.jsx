@@ -42,6 +42,7 @@ const adminPanelPromoCode = () => {
           apiEndpoint="/api/promo_codes"
           searchParam="code"
           onSearch={handleSearch}
+          navigatePath="/admin/add_promo_code"
         />
         <div className="p-6">
           {loading && (

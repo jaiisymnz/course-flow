@@ -45,7 +45,7 @@ const AdminPanel = () => {
           apiEndpoint="/api/courses"
           onSearch={handleSearch}
         />
-        <div className="p-6 relative">
+        <div className="p-6">
           {loading && (
             <div className="absolute inset-0 bg-white bg-opacity-80 flex items-center justify-center z-10">
               <div className="loader border-t-4 border-blue-500 w-12 h-12 rounded-full animate-spin"></div>
