@@ -9,13 +9,13 @@ import {
 } from "@/assets/icons/admin_icon/adminIcon";
 
 const menuItems = [
-  { name: "Course", icon: <BookIcon />, path: "/admin_panel" },
+  { name: "Course", icon: <BookIcon />, path: "/admin/course_list" },
   {
     name: "Assignment",
     icon: <ClipBoardIcon />,
-    path: "/admin_panel/assignments",
+    path: "/admin/assignment_list",
   },
-  { name: "Promo code", icon: <PromoIcon />, path: "/admin_panel/promo_code" },
+  { name: "Promo code", icon: <PromoIcon />, path: "/admin/promo_code" },
 ];
 
 const Sidebar = () => {
