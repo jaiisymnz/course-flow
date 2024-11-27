@@ -27,7 +27,7 @@ const Sidebar = () => {
 
   return (
     <div className="w-64 bg-white h-screen border-r p-4 relative">
-      <div className="mb-8 cursor-pointer">
+      <div onClick={() => handleNavigation("/admin/course_list")} className="mb-8 cursor-pointer">
         <AdminPanelIcon />
       </div>
 
