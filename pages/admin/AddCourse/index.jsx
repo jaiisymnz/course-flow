@@ -1,10 +1,10 @@
 import { Addcourse } from "@/components/AddCourse"
 
-const AdminPage = () => {
+const AddCoursePage = () => {
     return (
         <Addcourse/>
     )
 }
 
-export default AdminPage
+export default AddCoursePage
 
