@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import loadingIcon from "../assets/loading_icon.gif";
+import loadingIcon from "../assets/icons/admin_icon/loading_icon.gif";
 
-export const Addcourse = () => {
+export const AddCourse = () => {
   const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dlw0fxyfj/upload";
   const cloudinaryPresets = {
     image: "course_image",
@@ -176,7 +176,7 @@ export const Addcourse = () => {
   };
 
   return (
-    <form className="add-course-page bg-[#F6F7FC]" onSubmit={handleSubmit}>
+    <form className="add-course-page bg-[#F6F7FC] w-full" onSubmit={handleSubmit}>
       <header className="top-bar flex justify-between items-center h-[92px] px-10 py-4 bg-white">
         <h1 className="text-[24px] font-[500]">Add Course</h1>
         <div className="button flex gap-4">
@@ -393,9 +393,6 @@ export const Addcourse = () => {
                 <div className="relative w-[160px] h-[160px]">
                   {/* File Preview */}
                   <div className="w-full h-full flex flex-col justify-center items-center">
-                    <div className="text-[#9AA1B9] text-sm">
-                      {courseData.fileName}
-                    </div>
                     <div className="mt-2 text-sm text-[#9AA1B9]">
                       <a
                         href={previewData.file}
