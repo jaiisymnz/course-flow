@@ -9,8 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.20",
+    "@supabase/supabase-js": "^2.46.1",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "next": "^15.0.3",
+    "pg": "^8.13.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "bootstrap": "^5.3.3",
+<<<<<<< HEAD
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.46.1",
     "axios": "^1.7.8",
@@ -22,6 +29,9 @@
     
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106"
+=======
+    "autoprefixer": "^10.4.20"
+>>>>>>> c7fb902 (feat: create course page which shows all courses and search bar where can search keyword related course name)
   },
   "devDependencies": {
     "postcss": "^8",
