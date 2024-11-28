@@ -1,10 +1,12 @@
-import { Addcourse } from "@/components/AddCourse"
-
+import { AddCourse } from "@/components/AddCourse";
+import SideBar from "@/components/AdminSidebar";
 const AddCoursePage = () => {
-    return (
-        <Addcourse/>
-    )
-}
+  return (
+    <div className="flex">
+      <SideBar />
+      <AddCourse className=""/>
+    </div>
+  );
+};
 
-export default AddCoursePage
-
+export default AddCoursePage;
