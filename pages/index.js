@@ -7,7 +7,7 @@ import Checkout from "@/components/checkout-course";
 import Footer from "@/components/footer";
  export default function Homepage (){
     return (
-        <>
+        <div>
         <Navbar />
         <HeroSection />
         <Feature />
@@ -15,6 +15,6 @@ import Footer from "@/components/footer";
         <Review />
         <Checkout />
         <Footer />
-        </>
+        </div>
     )
 }
