@@ -19,6 +19,7 @@
     "bootstrap": "^5.3.3",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.46.1",
     "axios": "^1.7.8",
@@ -36,6 +37,9 @@
 =======
     "autoprefixer": "^10.4.20"
 >>>>>>> c7fb902 (feat: create course page which shows all courses and search bar where can search keyword related course name)
+=======
+    "autoprefixer": "^10.4.20"
+>>>>>>> 1998a85 (feat: create course page which shows all courses and search bar where can search keyword related course name)
   },
   "devDependencies": {
     "postcss": "^8",
