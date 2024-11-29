@@ -36,7 +36,6 @@ export default function Profile() {
         }
     };
 
-    console.log("user is ",userData);
     checkSession();
   }, [router]);
 
