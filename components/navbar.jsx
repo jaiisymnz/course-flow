@@ -1,6 +1,6 @@
 export default function Navbar() {
   return (
-    <nav className="bg-white py-4">
+    <nav className="bg-white py-4 shadow-xl">
       <div className="container mx-auto flex items-center justify-between px-4">
         {/* Logo */}
         <a href="#">
