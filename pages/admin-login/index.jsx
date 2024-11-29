@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import supabase from "@/lib/supabase";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -8,19 +8,37 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
+    
     try {
-      const response = await axios.post("/login", { email, password });
-      const { user, token } = response.data;
-      localStorage.setItem("token", token);
-      if (user.role === "admin") {
-        router.push("/admin");
-      } else {
-        alert("You do not have permission to access the admin panel.");
+      const { data: user, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        setError(error.message || "invalid credentials");
+        return;
+      }
+
+      if (user) {
+        const { data, error: roleError } = await supabase
+          .from("users")
+          .select("role")
+          .eq("email", email)
+          .single();
+
+        if (data.role === "admin") {
+          alert("admin log in succesfully");
+          // router.push("/admin/course_list");
+        } else {
+          alert("You do not have permission to access the admin panel.");
+        }
       }
     } catch (err) {
-      setError(err.response?.data?.error || "Invalid credentials");
+      setError(err.message || "An unexpected error occurred");
     }
   };
 
@@ -35,7 +53,7 @@ const LoginPage = () => {
             Admin Panel Control
           </h2>
         </header>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-10">
+        <form onSubmit={handleLogin} className="flex flex-col gap-10">
           <section className="email-fill">
             <label htmlFor="email">Email</label>
             <input
@@ -65,8 +83,15 @@ const LoginPage = () => {
               required
               className="w-full mt-1 px-4 py-3 border border-[#D6D9E4] rounded-[8px]"
             />
+
+            {error && (
+              <div className="text-center text-red-600 mt-4">{error}</div>
+            )}
           </section>
-          <button type="submit" className="login-button bg-[#2F5FAC] font-[700] py-[18px] px-[32px] text-white rounded-[12px]">
+          <button
+            type="submit"
+            className="login-button bg-[#2F5FAC] font-[700] py-[18px] px-[32px] text-white rounded-[12px]"
+          >
             Log in
           </button>
         </form>
