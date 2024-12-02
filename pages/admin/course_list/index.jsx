@@ -95,9 +95,7 @@ const AdminPanel = () => {
     return allCourses.map((course, index) => (
       <tr key={course.course_id} className="hover:bg-[#F6F7FC]">
         <td className="pl-4 py-4 border-t border-[#F1F2F6]">{index + 1}</td>
-        <td
-          className="p-4 border-t border-[#F1F2F6] w-[120px] h-[100px] " 
-        >
+        <td className="p-4 border-t border-[#F1F2F6] w-[120px] h-[100px] ">
           <img
             className="w-full h-full object-cover"
             src={course.image_file}

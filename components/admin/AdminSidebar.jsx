@@ -46,7 +46,9 @@ const Sidebar = () => {
             key={index}
             onClick={() => handleNavigation(item.path)}
             className={`text-[#424C6B] cursor-pointer flex items-center space-x-2 px-8 py-3 mt-0 ${
-              router.pathname === item.path ? "bg-[#F1F2F6]" : "hover:bg-[#F1F2F6]"
+              router.pathname === item.path
+                ? "bg-[#F1F2F6]"
+                : "hover:bg-[#F1F2F6]"
             }`}
           >
             {item.icon}
