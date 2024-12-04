@@ -7,29 +7,46 @@ import formatDate from "@/utils/formatDate";
 
 const AdminPanelPromoCode = () => {
   const [promoCodes, setPromoCodes] = useState([]);
-  const [filteredPromoCodes, setFilteredPromoCodes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
-    const fetchPromoCodes = async () => {
-      try {
-        const { data } = await axios.get("/api/admin/promo_codes");
-        setPromoCodes(data);
-        setFilteredPromoCodes(data);
-      } catch (err) {
-        console.error("Error fetching promo codes:", err);
-        setError("Failed to load promo codes.");
-      } finally {
-        setLoading(false);
-      }
-    };
+    fetchPromoCodes(currentPage);
+  }, [currentPage]);
 
-    fetchPromoCodes();
-  }, []);
+  const fetchPromoCodes = async (page) => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get("/api/admin/promo_codes", {
+        params: { page, limit: 6 },
+      });
+      setPromoCodes(data.data);
+      setTotalPages(data.totalPages);
+    } catch (err) {
+      console.error("Error fetching promo codes data:", err);
+      setError("Failed to load promo codes. data");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const handleSearch = (results) => {
-    setFilteredPromoCodes(results);
+  const handleSearch = async (searchQuery) => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get("/api/admin/promo_codes", {
+        params: { code: searchQuery, page: 1, limit: 6 },
+      });
+      setPromoCodes(data.data);
+      setTotalPages(data.totalPages);
+      setCurrentPage(1);
+    } catch (err) {
+      console.error("Error fetching promo_code data:", err);
+      setError("Failed to load promo_code data.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDelete = (id) => {
@@ -38,6 +55,30 @@ const AdminPanelPromoCode = () => {
 
   const handleEdit = (id) => {
     console.log("Edit promo code with id:", id);
+  };
+
+  const renderPagination = () => {
+    return (
+      <div className="flex justify-center mt-4">
+        <button
+          className="px-4 py-2 mx-2 bg-[#2F5FAC] hover:bg-[#3f74ca] rounded text-[#FFFFFF]"
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+        >
+          Previous
+        </button>
+        <span className="px-4 py-2">{`Page ${currentPage} of ${totalPages}`}</span>
+        <button
+          className="px-4 py-2 mx-2 bg-[#2F5FAC] hover:bg-[#3f74ca] rounded text-[#FFFFFF]"
+          disabled={currentPage === totalPages}
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
+        >
+          Next
+        </button>
+      </div>
+    );
   };
 
   const renderTableHeaders = () => {
@@ -57,17 +98,7 @@ const AdminPanelPromoCode = () => {
   };
 
   const renderTableBody = () => {
-    if (filteredPromoCodes.length === 0) {
-      return (
-        <tr>
-          <td colSpan="6" className="text-center p-4 text-gray-500">
-            No promo codes found.
-          </td>
-        </tr>
-      );
-    }
-
-    return filteredPromoCodes.map((promoCode) => (
+    return promoCodes.map((promoCode) => (
       <tr key={promoCode.promo_code_id} className="hover:bg-[#F6F7FC]">
         <td className="p-4 border-t border-[#F1F2F6]">{promoCode.code}</td>
         <td className="p-4 border-t border-[#F1F2F6]">
@@ -102,24 +133,34 @@ const AdminPanelPromoCode = () => {
           title="Promo Code"
           buttonLabel="+ Add Promo Code"
           apiEndpoint="/api/promo_codes"
-          searchParam="code"
           onSearch={handleSearch}
           navigatePath="/admin/add_promo_code"
         />
         <div className="p-6">
-          {loading && (
+          {loading ? (
             <div className="absolute inset-0 bg-[#FFFFFF] bg-opacity-80 flex items-center justify-center z-10">
               <div className="loader border-t-4 border-[#2F5FAC] w-12 h-12 rounded-full animate-spin"></div>
             </div>
-          )}
-          {error && <div className=" text-center">{error}</div>}
-          {!loading && !error && (
-            <table className="w-[80vw] text-left borde m-8 rounded-lg overflow-hidden shadow-sm">
-              <thead className="bg-[#E4E6ED]">
-                <tr>{renderTableHeaders()}</tr>
-              </thead>
-              <tbody className="bg-[#FFFFFF]">{renderTableBody()}</tbody>
-            </table>
+          ) : (
+            <>
+              <table className="w-[80vw]  text-left m-8 rounded-lg overflow-hidden shadow-sm">
+                <thead className="bg-[#E4E6ED]">
+                  <tr>{renderTableHeaders()}</tr>
+                </thead>
+                <tbody className="bg-[#FFFFFF]">
+                  {promoCodes.length === 0 ? (
+                    <tr>
+                      <td colSpan="8" className="text-center text-[#6B7280]">
+                        Promo_code Not Found
+                      </td>
+                    </tr>
+                  ) : (
+                    renderTableBody()
+                  )}
+                </tbody>
+              </table>
+              {renderPagination()}
+            </>
           )}
         </div>
       </div>

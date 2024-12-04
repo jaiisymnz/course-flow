@@ -1,29 +1,14 @@
 import React, { useState } from "react";
 import { MagnifyingIcon } from "@/assets/icons/admin_icon/adminIcon";
-import axios from "axios";
 import { useRouter } from "next/router";
 
-const AdminHeaderbar = ({
-  title,
-  buttonLabel,
-  onSearch,
-  apiEndpoint,
-  searchParam = "name",
-  navigatePath,
-}) => {
+const AdminHeaderbar = ({ title, buttonLabel, onSearch, navigatePath }) => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearch = async (event) => {
+  const handleSearch = (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.get(apiEndpoint, {
-        params: { [searchParam]: searchQuery },
-      });
-      onSearch(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+    onSearch(searchQuery);
   };
 
   const handleNavigation = (path) => {
