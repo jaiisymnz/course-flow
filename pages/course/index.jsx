@@ -123,7 +123,7 @@ export default function Course() {
               </svg>
               <input
                 placeholder="Search..."
-                onClick={handleInputChange}
+                onChange={handleInputChange}
                 className="z-50 w-fit"
               ></input>
             </div>
@@ -134,27 +134,30 @@ export default function Course() {
         <div className="course-card flex flex-col items-center md:grid md:grid-cols-2 lg:grid-cols-3 w-full md:w-fit gap-8 px-4">
           {courses.length > 0 ? (
             courses.map((course, course_id) => (
-              <dev
+              <div
                 key={course_id}
-                className="card h-[475px] w-[343px] rounded-lg flex flex-col gap-2 border-x bg-white drop-shadow-xl hover:shadow-lg hover:cursor-pointer"
+                className="card h-[475px] w-[343px] rounded-lg flex flex-col gap-2  bg-white drop-shadow-xl overflow-hidden hover:shadow-lg hover:cursor-pointer"
                 onClick={() => {
                   router.push(`course/${course.course_id}`);
                 }}
               >
-                <div className="course-img w-full h-[240px]">
-                  <img
-                    src={course.image_file}
-                    alt={course.course_name}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+                <img
+                  src={course.image_file}
+                  alt={course.course_name}
+                  className="w-full h-[240px] object-cover"
+                />
+
                 <div className="course-content h-[122px] px-3 pt-2 flex flex-col gap-1">
-                  <p className="text-orange-500 font-normal text-xs">Course</p>
-                  <p className="course-name font-normal text-xl">
+                  <p className="m-0 text-orange-500 font-normal text-xs">
+                    Course
+                  </p>
+                  <p className="m-0 course-name font-normal text-xl">
                     {course.course_name}
                   </p>
                   <p className="course-detial font-normal text-sm text-gray-700">
-                    {course.detail}
+                    {course.summary.length > 50
+                      ? `${course.summary.substring(0, 200)}... `
+                      : course.summary}
                   </p>
                 </div>
                 <div className="course-footer border-t-[1px] flex flex-row gap-6 p-3">
@@ -195,7 +198,7 @@ export default function Course() {
                     &#160; {course.total_time} Hours
                   </div>
                 </div>
-              </dev>
+              </div>
             ))
           ) : (
             <p>Loading...</p>

@@ -1,46 +1,61 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function SubscritonFloat({ course }) {
+export default function SubscriptionFloat({ course }) {
   const [showButton, setShowButton] = useState(false);
+  
+   const formatPrice = (price) => {
+     return price.toLocaleString("en-US");
+   };
+
+
+  // ตรวจสอบว่า course มีค่าหรือไม่
+  if (!course) {
+    return (
+      <div className="error-message text-red-500">
+        Error: Course data is not available.
+      </div>
+    );
+  }
 
   return (
-    <div className="subscriton-float sticky bottom-0 w-full lg:w-[357px] lg:px-6 lg:py-6 flex flex-col gap-2 py-3 bg-white">
+    <div className="subscription-float  w-full lg:w-[357px] px-4 lg:px-6 flex flex-col gap-2 py-3 bg-white">
       {/* course label */}
       {showButton ? (
-        <div className="text-xs text-orange-500 lg:hidden">Couse</div>
+        <div className="text-xs text-orange-500 lg:hidden">Course</div>
       ) : null}
-      <div className="text-xs text-orange-500 hidden lg:grid">Couse</div>
+      <div className="text-xs text-orange-500 hidden lg:grid">Course</div>
 
       {/* header */}
-      <div className="header flex justify-between gap-1">
-
-        {/* แก้ให้ตอน lg มันเป็น gap 10 ให้ได้ */}
+      <div className="header flex justify-between gap-1 ">
         <div className="header-l flex flex-col gap-1 text-base font-normal">
-          <div className="m-0 lg:text-2xl">{course.course_name}</div>
-          <div className="text-xs text-gray-700 hidden lg:grid lg:text-base">
-            {course.detail}
+          <div className="header-l-course m-0 lg:text-2xl">
+            {course.course_name}
+          </div>
+          <div className="header-l-detail text-xs text-gray-700 hidden lg:grid lg:text-base">
+            {course.summary}
           </div>
           {showButton ? (
             <div className="text-xs text-gray-700 lg:hidden">
               {course.detail}
             </div>
           ) : null}
-          <p className="m-0 text-gray-700 lg:text-2xl">THB {course.price}</p>
+          <p className="m-0 text-gray-700 lg:text-2xl">THB {formatPrice(course.price)}</p>
         </div>
         {/* ปุ่มซ่อน/แสดง */}
         <div className="header-r lg:hidden">
           {showButton ? (
-            <button>
+            <button
+              onClick={() => {
+                setShowButton(!showButton);
+                console.log(showButton);
+              }}
+            >
               <svg
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                onClick={() => {
-                  setShowButton(!showButton);
-                  console.log(showButton);
-                }}
               >
                 <g clipPath="url(#clip0_11339_6014)">
                   <rect
@@ -64,17 +79,18 @@ export default function SubscritonFloat({ course }) {
               </svg>
             </button>
           ) : (
-            <button>
+            <button
+              onClick={() => {
+                setShowButton(!showButton);
+                console.log(showButton);
+              }}
+            >
               <svg
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                onClick={() => {
-                  setShowButton(!showButton);
-                  console.log(showButton);
-                }}
               >
                 <g clipPath="url(#clip0_11339_5947)">
                   <rect width="24" height="24" fill="white" />
