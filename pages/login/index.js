@@ -68,7 +68,7 @@ export default function Login() {
         <Navbar/>
         <div className='lg:flex lg:items-center lg:justify-center lg:py-10 pb-10  relative overflow-hidden'>
             <div className='lg:w-[30%] pt-10 lg:py-20 pb-20 px-4'>
-                <h3 className='text-2xl text-[#22269E] font-medium'>
+                <h3 className='text-4xl text-[#22269E] font-medium'>
                     Welcome back!
                 </h3>
 
@@ -128,7 +128,7 @@ export default function Login() {
 
                     <button 
                         type='submit'
-                        className='bg-[#2F5FAC] text-white py-4 px-8 rounded-2xl font-bold mt-2 cursor-pointer'
+                        className='bg-[#2F5FAC] text-white py-[18px] px-8 rounded-2xl font-bold mt-2 cursor-pointer hover:bg-blue-600'
                     >
                         Log in
                     </button>
@@ -143,7 +143,7 @@ export default function Login() {
                 </h4>
 
                 <div className='z-[-1] w-[30px] lg:w-[75px] lg:h-[75px] h-[30px] rounded-full bg-[#C6D6EF]
-                        absolute left-[-4%] sm:left-0 lg:left-[10%] top-5 lg:top-20'
+                        absolute left-[-4%] sm:left-0 lg:left-[10%] top-[-1%] lg:top-16'
                 >
 
                 </div>
@@ -154,13 +154,13 @@ export default function Login() {
                 </svg>
 
 
-                <div className='absolute top-[30%] lg:top-[60%] right-[5%] sm:right-[3%] lg:right-[10%] 
+                <div className='absolute top-[38%] lg:top-[68%] right-[5%] sm:right-[3%] lg:right-[5%] 
                         w-[10px] lg:w-[35px] lg:h-[35px] h-[10px] rounded-full border-[3px] border-[#F47E20]'
                 >
 
                 </div>
 
-                <div className='z-[-1] absolute bottom-0 lg:bottom-[25%] left-[-23%] sm:left-[-10%] lg:left-[-30%] 
+                <div className='z-[-1] absolute bottom-0 lg:bottom-[20%] left-[-23%] sm:left-[-10%] lg:left-[-30%] 
                         xl:left-[-25%] 2xl:left-[-20%] w-[110px] lg:w-[400px] lg:h-[420px] h-[110px] bg-[#FBAA1C] rounded-full'
                 >
 
